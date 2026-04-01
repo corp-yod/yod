@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
 import 'package:yod/src/package_manager/core/domain/manager/kor_manager.dart';
 import 'package:yod/src/package_manager/core/domain/manager/yod_proxy.dart';
@@ -32,12 +34,12 @@ class _YodBuilderState extends State<YodBuilder> {
 
     final found = YodProxy.stopTracking();
 
-    if (found != null) {
-      _detectedWatchers = found;
-      for (var kor in _detectedWatchers) {
-        kor.addListener(_update);
-      }
+    final added = newWatchers.difference(_detectedWatchers);
+    for (var kor in added) {
+      log('YodBuilder: Adding listener to $kor');
+      kor.addListener(_update);
     }
+    _detectedWatchers = Set.from(newWatchers);
   }
 
   void _update() {
@@ -47,13 +49,25 @@ class _YodBuilderState extends State<YodBuilder> {
   @override
   void dispose() {
     for (var kor in _detectedWatchers) {
+      log('YodBuilder: Removing listener from $kor');
       kor.removeListener(_update);
     }
-
     _detectedWatchers.clear();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => widget.builder();
+  Widget build(BuildContext context) {
+    YodProxy.startTracking();
+
+    final result = widget.builder();
+
+    final newWatchers = YodProxy.stopTracking() ?? {};
+
+    if (!_areSetsEqual(_detectedWatchers, newWatchers)) {
+      _updateListeners(newWatchers);
+    }
+
+    return result;
+  }
 }

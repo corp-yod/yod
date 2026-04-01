@@ -1,19 +1,20 @@
 import 'package:yod/src/package_manager/core/domain/manager/kor_manager.dart';
 
 class YodProxy {
-  static Set<Kor>? _currentWatchers;
+  static final List<Set<Kor>> _stack = [];
 
   static void startTracking() {
-    _currentWatchers = <Kor>{};
+    _stack.add(<Kor>{});
   }
 
   static Set<Kor>? stopTracking() {
-    final watchers = _currentWatchers;
-    _currentWatchers = null;
-    return watchers;
+    if (_stack.isEmpty) return null;
+    return _stack.removeLast();
   }
 
   static void register(Kor kor) {
-    _currentWatchers?.add(kor);
+    if (_stack.isNotEmpty) {
+      _stack.last.add(kor);
+    }
   }
 }

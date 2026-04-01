@@ -17,20 +17,22 @@ class YodBuilder extends StatefulWidget {
 
 class _YodBuilderState extends State<YodBuilder> {
   Set<Kor> _detectedWatchers = {};
-
-  void _update() {
-    log(
-      'YodBuilder: Detected change in one of the watchers, rebuilding... || $_detectedWatchers',
-    );
-    setState(() {});
+  @override
+  void initState() {
+    super.initState();
+    _makeConnection();
   }
 
-  void _updateListeners(Set<Kor> newWatchers) {
-    final removed = _detectedWatchers.difference(newWatchers);
-    for (var kor in removed) {
-      log('YodBuilder: Removing listener from $kor');
+  void _makeConnection() {
+    for (var kor in _detectedWatchers) {
       kor.removeListener(_update);
     }
+
+    YodProxy.startTracking();
+
+    widget.builder();
+
+    final found = YodProxy.stopTracking();
 
     final added = newWatchers.difference(_detectedWatchers);
     for (var kor in added) {
@@ -40,7 +42,9 @@ class _YodBuilderState extends State<YodBuilder> {
     _detectedWatchers = Set.from(newWatchers);
   }
 
-  bool _areSetsEqual(Set a, Set b) => a.length == b.length && a.containsAll(b);
+  void _update() {
+    if (mounted) setState(() {});
+  }
 
   @override
   void dispose() {

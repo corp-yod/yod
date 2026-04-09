@@ -16,7 +16,9 @@ class RequestHandler {
     BuildContext? context,
   }) {
     try {
-      // String url;
+      // Todo มาทำ get base url จาก config
+      String baseUrl = 'http://localhost:8080';
+
       // bool isAuthorization = false;
       // mock
       bool isAuthorization = true;
@@ -26,9 +28,11 @@ class RequestHandler {
         isAuthorization: isAuthorization,
       );
 
+      String url = '$baseUrl/${option.urlName}';
+
       RequestConfig requestConfig = RequestConfig(
         context: context,
-        url: 'http://localhost:8080',
+        url: url,
         method: option.method,
         yodHttpBaseOption: option,
         headers: headers,

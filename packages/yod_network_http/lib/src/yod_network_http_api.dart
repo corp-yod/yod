@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yod_network_http/src/yod_interface/yod_network_http_interface/model/http_base_option.dart';
 import 'package:yod_network_http/src/yod_interface/yod_network_http_interface/model/http_initial_value.dart';
@@ -16,7 +17,7 @@ class YodNetworkHttp {
     await YodNetworkHttpPlatform.instance.init(initialValue);
   }
 
-  Future<dynamic> request(YodHttpBaseOption option, {BuildContext? context}) {
+  Future<Response<dynamic>> request(YodHttpBaseOption option, {BuildContext? context}) {
     return YodNetworkHttpPlatform.instance.request(option, context: context);
   }
 

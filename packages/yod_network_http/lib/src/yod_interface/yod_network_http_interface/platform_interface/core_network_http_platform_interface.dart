@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yod_network_http/src/yod_interface/yod_network_http_interface/method_channel/core_network_http_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -29,7 +30,10 @@ abstract class YodNetworkHttpPlatform extends PlatformInterface {
     throw UnimplementedError('init() has not been implemented.');
   }
 
-  Future<dynamic> request(YodHttpBaseOption option, {BuildContext? context}) {
+  Future<Response<dynamic>> request(
+    YodHttpBaseOption option, {
+    BuildContext? context,
+  }) {
     throw UnimplementedError('request() has not been implemented.');
   }
 

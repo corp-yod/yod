@@ -4,6 +4,7 @@
 // ignore: avoid_web_libraries_in_flutter
 
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yod_network_http/src/handler/request_handler.dart';
 import 'package:yod_network_http/src/model/request_config.dart';
@@ -22,13 +23,16 @@ class YodNetworkHttpDart extends YodNetworkHttpPlatform {
 
   @override
   Future<void> init(HttpInitialValue initialValue) async {
+    print(
+      '#->>> CoreNetwork [HTTP] init: initialValue=${initialValue.toJson()}',
+    );
     // await NetworkHelper().initConstants(initialValue);
     // await NetworkHelper().subscribeConnectivityChanged();
     // await CacheHelper().init();
   }
 
   @override
-  Future<dynamic> request(
+  Future<Response<dynamic>> request(
     YodHttpBaseOption option, {
     BuildContext? context,
   }) async {

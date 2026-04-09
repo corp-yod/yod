@@ -21,3 +21,12 @@ dev_dependencies:
   melos: ^6.3.3
 
 flutter:
+  plugin:
+    platforms:
+      # web:
+      #   pluginClass: CoreNetworkHttpWeb
+      #   fileName: src/platform/core_network_http_web.dart
+      android:
+        dartPluginClass: YodNetworkHttpDart
+      ios:
+        dartPluginClass: YodNetworkHttpDart

@@ -39,7 +39,7 @@ class YodNetworkHttpDart extends YodNetworkHttpPlatform {
     print(
       'CoreNetwork [HTTP] request: option=${option.toJson()}, context=$context',
     );
-    RequestConfig requestConfig = RequestHandler().buildRequestConfig(
+    RequestConfig requestConfig = await RequestHandler().buildRequestConfig(
       option: option,
       context: context,
     );

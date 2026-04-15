@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
+import 'package:yod_data/yod_data.dart';
 import 'package:yod_network_http/src/handler/response_handler.dart';
 import 'package:yod_network_http/src/helper/dio_helper.dart';
 import 'package:yod_network_http/src/model/request_config.dart';
@@ -11,10 +12,10 @@ class RequestHandler {
   factory RequestHandler() => _instance;
   RequestHandler._internal();
 
-  RequestConfig buildRequestConfig({
+  Future<RequestConfig> buildRequestConfig({
     required YodHttpBaseOption option,
     BuildContext? context,
-  }) {
+  }) async {
     try {
       // Todo มาทำ get base url จาก config
       String baseUrl = 'http://localhost:8080';
@@ -23,7 +24,7 @@ class RequestHandler {
       // mock
       bool isAuthorization = true;
 
-      final Map<String, String> headers = _buildRequestHeaders(
+      final Map<String, String> headers = await _buildRequestHeaders(
         option: option,
         isAuthorization: isAuthorization,
       );
@@ -49,17 +50,20 @@ class RequestHandler {
     }
   }
 
-  Map<String, String> _buildRequestHeaders({
+  Future<Map<String, String>> _buildRequestHeaders({
     required YodHttpBaseOption option,
     required bool isAuthorization,
-  }) {
+  }) async {
     final Map<String, String> headers = LinkedHashMap<String, String>(
       equals: (a, b) => a.toLowerCase() == b.toLowerCase(),
       hashCode: (key) => key.toLowerCase().hashCode,
     )..addAll(option.headers?.map((k, v) => MapEntry(k, v.toString())) ?? {});
 
     try {
-      final accessToken = 'accessToken'; // Todo มาทำ get access token เอง
+      final accessToken = await YodData.instance.secureStorage().getKeyValue(
+        'accessToken',
+      );
+
       if (isAuthorization && accessToken != null) {
         headers['Authorization'] = 'Bearer $accessToken';
       }

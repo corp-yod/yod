@@ -3,6 +3,8 @@ description: "A new Flutter package project."
 version: 0.0.1
 homepage:
 
+publish_to: "none"
+
 environment:
   sdk: ^3.8.1
   flutter: ">=1.17.0"
@@ -13,6 +15,9 @@ dependencies:
 
   dio: ^5.9.2
   plugin_platform_interface: ^2.1.8
+
+  yod_data:
+    path: ../yod_data
 
 dev_dependencies:
   flutter_test:

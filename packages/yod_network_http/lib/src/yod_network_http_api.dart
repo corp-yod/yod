@@ -7,17 +7,23 @@ import 'package:yod_network_http/src/yod_interface/yod_network_http_interface/pl
 class YodNetworkHttp {
   @visibleForTesting
   static set instance(YodNetworkHttp value) => _instance = value;
-  static YodNetworkHttp get instance => _instance;
+
+  factory YodNetworkHttp() => _instance;
+
+  YodNetworkHttp._internal();
 
   static YodNetworkHttp _instance = YodNetworkHttp._internal();
-  YodNetworkHttp._internal();
-  factory YodNetworkHttp() => _instance;
+
+  static YodNetworkHttp get instance => _instance;
 
   Future<void> init(HttpInitialValue initialValue) async {
     await YodNetworkHttpPlatform.instance.init(initialValue);
   }
 
-  Future<Response<dynamic>> request(YodHttpBaseOption option, {BuildContext? context}) {
+  Future<Response<dynamic>> request(
+    YodHttpBaseOption option, {
+    BuildContext? context,
+  }) {
     return YodNetworkHttpPlatform.instance.request(option, context: context);
   }
 

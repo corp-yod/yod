@@ -1,4 +1,4 @@
-name: yod_network_http
+name: yod_data
 description: "A new Flutter package project."
 version: 0.0.1
 homepage:
@@ -11,21 +11,25 @@ dependencies:
   flutter:
     sdk: flutter
 
-  dio: ^5.9.2
+  isar: ^3.1.0+1
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^10.0.0
   plugin_platform_interface: ^2.1.8
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  build_runner: ^2.13.1
 
 flutter:
   plugin:
     platforms:
       # web:
-      #   pluginClass: CoreNetworkHttpWeb
-      #   fileName: src/platform/core_network_http_web.dart
+      #   pluginClass: CoreDataWeb
+      #   fileName: src/platform/core_data_web.dart
       android:
-        dartPluginClass: YodNetworkHttpDart
+        dartPluginClass: YodDataDart
       ios:
-        dartPluginClass: YodNetworkHttpDart
+        dartPluginClass: YodDataDart

@@ -13,6 +13,8 @@ dependencies:
 
   yod_network_http:
     path: packages/yod_network_http
+  yod_data:
+    path: packages/yod_data
 
 dev_dependencies:
   flutter_test:
@@ -21,12 +23,3 @@ dev_dependencies:
   melos: ^6.3.3
 
 flutter:
-  plugin:
-    platforms:
-      # web:
-      #   pluginClass: CoreNetworkHttpWeb
-      #   fileName: src/platform/core_network_http_web.dart
-      android:
-        dartPluginClass: YodNetworkHttpDart
-      ios:
-        dartPluginClass: YodNetworkHttpDart

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/yod.iml" filepath="$PROJECT_DIR$/yod.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/yod_network_http/example/melos_example.iml" filepath="$PROJECT_DIR$/packages/yod_network_http/example/melos_example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/yod_network_http/melos_yod_network_http.iml" filepath="$PROJECT_DIR$/packages/yod_network_http/melos_yod_network_http.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_yod_workspace.iml" filepath="$PROJECT_DIR$/melos_yod_workspace.iml" />
     </modules>
   </component>
 </project>

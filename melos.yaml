@@ -1,0 +1,20 @@
+name: yod_workspace
+
+packages:
+  - packages/**
+
+scripts:
+  bootstrap:
+    run: melos bootstrap
+
+  analyze:
+    run: flutter analyze
+
+  test:
+    run: flutter test
+
+  clean:
+    run: melos exec -- flutter clean
+
+  get:
+    run: melos exec -- flutter pub get
